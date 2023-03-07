@@ -18,7 +18,7 @@
   
        <div class="form-group">
         <%= f.label :email,'メールアドレス' %>
-        <%= f.text_field :email, class: 'form-control' %>
+        <%= f.email_field :email, class: 'form-control', placeholder: "sample@example.com" %>
         <% if @user.errors.include?(:email) %>
           <p style="color: red;"><%= @user.errors.full_messages_for(:email).first %>
         <% end %>

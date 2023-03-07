@@ -8,11 +8,17 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  validates :name, length: { minimum:2, maximum: 20 }, uniqueness: true
-  validates :introduction, length: { maximum: 50 }
+  validates :name,presence: true, length: { minimum: 2 }
+  validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,message: "は正しいフォーマットで入力してください" }, uniqueness: { message: "このアドレスは使用できません"}
   validates :profile_image, presence: false
-  validates :email, uniqueness: true
+  validates :password, presence: true, length: { minimum: 6 }
   
+  # 退会済みはログイン不可
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
+  
+  # 画像
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
