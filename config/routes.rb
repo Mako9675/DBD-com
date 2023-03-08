@@ -3,8 +3,11 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
+  devise_scope :user do
+    get '/sign_in', to: 'public/sessions#new'
+  end
 
-  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
   

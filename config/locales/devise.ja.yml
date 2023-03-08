@@ -2,8 +2,8 @@ ja:
   activerecord:
     attributes:
       user:
-        birthday: "生年月日"
-        nickname: "ニックネーム"
+        birthday: 生年月日
+        nickname: ニックネーム
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
         confirmed_at: パスワード確認時刻
@@ -30,6 +30,9 @@ ja:
     models:
       user: ユーザー
   devise:
+    sessions:
+      signed_in: "ログインに成功しました。"
+      signed_out: "ログアウトに成功しました。"
     confirmations:
       confirmed: メールアドレスが確認できました。
       new:

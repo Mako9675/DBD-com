@@ -19,17 +19,9 @@ class ApplicationController < ActionController::Base
         new_user_session_path
       end
     end
-
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password])
-    end
     
     protected
-      def configure_permitted_parameters
-        if resource_class == User
-            devise_parameter_sanitizer.permit(:sign_up, keys: [:name,:email])
-            devise_parameter_sanitizer.permit(:sign_in,keys:[:email])
-            devise_parameter_sanitizer.permit(:account_update,keys:[:name,:email])
-        end
+      def configure_sign_up_parameters
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
       end
 end

@@ -20,7 +20,7 @@ class Public::SessionsController < Devise::SessionsController
 
   protected
   def reject_user
-    @user = User.find_by(email: params[:user][:email])
+    @user = User.find_by(email: params[:user][:name])
     if @user 
       if @user.valid_password?(params[:user][:password]) && (@user.is_deleted == false)
         flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
@@ -30,6 +30,10 @@ class Public::SessionsController < Devise::SessionsController
       end
     end
   end
+  
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name,:email])
+    end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
